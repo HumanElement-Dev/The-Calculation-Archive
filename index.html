@@ -1,14 +1,27 @@
 <html>
-    <body>
-  <label>
-    Enter Number:
-    <input id="input" type="number" value="42" />
-  </label>
+  <body>
+    <label>
+      Enter Number:
+      <input id="input" type="number" />
+    </label>
 
-  <hr />
+    <button id="generate">Generate</button>
 
-  <div>
-    Result: <span id="output"></span>
-  </div>
-</body>
+    <hr />
+
+    <div>
+      Result:
+      <input id="output" type="number" readonly />
+    </div>
+
+    <script>
+      const input = document.getElementById("input");
+      const output = document.getElementById("output");
+      const button = document.getElementById("generate");
+
+      button.addEventListener("click", function() {
+        output.value = input.value;
+      });
+    </script>
+  </body>
 </html>
