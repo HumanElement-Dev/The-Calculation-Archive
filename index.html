@@ -1,6 +1,33 @@
 <html>
   <body>
-      <input id="display" type="number" />
-      <button onclick="display.value=(display.value-0)+1">+1</button>
+      <input id="display" type="text" value="0" /><br>
+      <button onclick="appendSymbol('+')">+</button>
+      <button onclick="appendSymbol('1')">1</button>
+      <button onclick="calculate()">=</button>
+      <button onclick="clearDisplay()">C</button>
+      
+      <script>
+        function appendSymbol(symbol) {
+          const display = document.getElementById('display');
+          if (display.value === '0') {
+            display.value = symbol;
+          } else {
+            display.value += symbol;
+          }
+        }
+        
+        function calculate() {
+          const display = document.getElementById('display');
+          try {
+            display.value = eval(display.value);
+          } catch (e) {
+            display.value = 'Error';
+          }
+        }
+        
+        function clearDisplay() {
+          document.getElementById('display').value = '0';
+        }
+      </script>
     </body>
 </html>
