@@ -1,4 +1,18 @@
-# The-Calculation-Archive
+# The-Calculation-Archive V2
+A deliberately minimal HTML artifact.
+
+This project begins with the smallest possible interactive web application:
+
+- one display
+- a few buttons
+- no styling
+- no frameworks
+-no dependencies
+- no build tools
+
+The second version demonstrates the core of any calculator
+
+# The-Calculation-Archive V1
 # Raw Input → Output
 
 A deliberately minimal HTML artifact.
