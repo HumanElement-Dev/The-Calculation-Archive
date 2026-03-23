@@ -1,7 +1,19 @@
 <html>
-  <body style="text-align:center;margin-top:100px;">
-      <button onclick="clearDisplay()" style="font-size:40px;width:100px;height:50px;">C</button>
-      <input id="display" type="text" value="0" style="font-size:40px;text-align:center;width:300px;height:50px;"><br><br>
+  <body style="text-align:center;margin-top:20px;">
+      <div style="margin-bottom:30px;">
+        <label style="font-size:16px;">Select Calculator</label>
+        <select id="calculatorToggle" onchange="switchCalculator()" style="font-size:14px;padding:8px;">
+          <option value="handcodedv0">hand coded v0</option>
+          <option value="simple">Simple (4-Function)</option>
+          <option value="minimalist">Minimalist no style</option>
+          <option value="basic">Basic Minimal</option>
+        </select>
+      </div>
+
+      <!-- Calculator: hand coded v0 -->
+      <div id="handcodedv0Calc">
+        <button onclick="clearDisplay()" style="font-size:40px;width:100px;height:50px;">C</button>
+        <input id="display" type="text" value="0" style="font-size:40px;text-align:center;width:300px;height:50px;"><br><br>
       <button onclick="appendSymbol('7')" style="font-size:30px;width:100px;height:80px;">7</button>
       <button onclick="appendSymbol('8')" style="font-size:30px;width:100px;height:80px;">8</button>
       <button onclick="appendSymbol('9')" style="font-size:30px;width:100px;height:80px;">9</button>
@@ -20,9 +32,86 @@
       <button onclick="appendSymbol('.')" style="font-size:30px;width:100px;height:80px;">.</button>
       <button onclick="calculate()" style="font-size:30px;width:100px;height:80px;">=</button>
       <button onclick="appendSymbol('+')" style="font-size:30px;width:100px;height:80px;">+</button>
-      
+      </div>
+
+      <!-- Simple 4-Function Calculator -->
+      <div id="simpleCalc" style="display:none;">
+        <button onclick="clearDisplaySimple()" style="font-size:40px;width:100px;height:50px;">C</button>
+        <input id="displaySimple" type="text" value="0" style="font-size:40px;text-align:center;width:300px;height:50px;"><br><br>
+        <button onclick="appendSymbolSimple('7')" style="font-size:30px;width:200px;height:80px;">7</button>
+        <button onclick="appendSymbolSimple('8')" style="font-size:30px;width:200px;height:80px;">8</button>
+        <button onclick="appendSymbolSimple('9')" style="font-size:30px;width:200px;height:80px;">9</button>
+        <button onclick="appendSymbolSimple('/')" style="font-size:30px;width:200px;height:80px;">÷</button><br><br>
+        <button onclick="appendSymbolSimple('4')" style="font-size:30px;width:200px;height:80px;">4</button>
+        <button onclick="appendSymbolSimple('5')" style="font-size:30px;width:200px;height:80px;">5</button>
+        <button onclick="appendSymbolSimple('6')" style="font-size:30px;width:200px;height:80px;">6</button>
+        <button onclick="appendSymbolSimple('-')" style="font-size:30px;width:200px;height:80px;">−</button><br><br>
+        <button onclick="appendSymbolSimple('1')" style="font-size:30px;width:200px;height:80px;">1</button>
+        <button onclick="appendSymbolSimple('2')" style="font-size:30px;width:200px;height:80px;">2</button>
+        <button onclick="appendSymbolSimple('3')" style="font-size:30px;width:200px;height:80px;">3</button>
+        <button onclick="appendSymbolSimple('+')" style="font-size:30px;width:200px;height:80px;">+</button><br><br>
+        <button onclick="appendSymbolSimple('0')" style="font-size:30px;width:200px;height:80px;">0</button>
+        <button onclick="calculateSimple()" style="font-size:30px;width:400px;height:80px;">=</button>
+      </div>
+
+      <!-- Basic Minimal Calculator -->
+      <div id="basicCalc" style="display:none;margin-top:20px;">
+        <div style="width:280px;margin:0 auto;border:1px solid #333;padding:10px;background:#f5f5f5;">
+          <input id="displayBasic" type="text" value="0" style="width:100%;box-sizing:border-box;margin-bottom:10px;padding:8px;font-size:20px;border:1px solid #ccc;">
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;">
+            <button onclick="clearDisplayBasic()" style="padding:15px;font-size:16px;border:1px solid #999;background:#e0e0e0;cursor:pointer;">C</button>
+            <button onclick="appendSymbolBasic('7')" style="padding:15px;font-size:16px;border:1px solid #999;background:#fff;cursor:pointer;">7</button>
+            <button onclick="appendSymbolBasic('8')" style="padding:15px;font-size:16px;border:1px solid #999;background:#fff;cursor:pointer;">8</button>
+            <button onclick="appendSymbolBasic('9')" style="padding:15px;font-size:16px;border:1px solid #999;background:#fff;cursor:pointer;">9</button>
+            <button onclick="appendSymbolBasic('/')" style="padding:15px;font-size:16px;border:1px solid #999;background:#fff;cursor:pointer;">/</button>
+            <button onclick="appendSymbolBasic('4')" style="padding:15px;font-size:16px;border:1px solid #999;background:#fff;cursor:pointer;">4</button>
+            <button onclick="appendSymbolBasic('5')" style="padding:15px;font-size:16px;border:1px solid #999;background:#fff;cursor:pointer;">5</button>
+            <button onclick="appendSymbolBasic('6')" style="padding:15px;font-size:16px;border:1px solid #999;background:#fff;cursor:pointer;">6</button>
+            <button onclick="appendSymbolBasic('-')" style="padding:15px;font-size:16px;border:1px solid #999;background:#fff;cursor:pointer;">-</button>
+            <button onclick="appendSymbolBasic('1')" style="padding:15px;font-size:16px;border:1px solid #999;background:#fff;cursor:pointer;">1</button>
+            <button onclick="appendSymbolBasic('2')" style="padding:15px;font-size:16px;border:1px solid #999;background:#fff;cursor:pointer;">2</button>
+            <button onclick="appendSymbolBasic('3')" style="padding:15px;font-size:16px;border:1px solid #999;background:#fff;cursor:pointer;">3</button>
+            <button onclick="appendSymbolBasic('*')" style="padding:15px;font-size:16px;border:1px solid #999;background:#fff;cursor:pointer;">*</button>
+            <button onclick="appendSymbolBasic('0')" style="padding:15px;font-size:16px;border:1px solid #999;background:#fff;cursor:pointer;">0</button>
+            <button onclick="appendSymbolBasic('.')" style="padding:15px;font-size:16px;border:1px solid #999;background:#fff;cursor:pointer;">.</button>
+            <button onclick="calculateBasic()" style="padding:15px;font-size:16px;border:1px solid #999;background:#90EE90;cursor:pointer;grid-column:span 2;">=</button>
+            <button onclick="appendSymbolBasic('+')" style="padding:15px;font-size:16px;border:1px solid #999;background:#fff;cursor:pointer;">+</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Minimalist Calculator (No Style) -->
+      <div id="minimalistCalc" style="display:none;">
+        <input id="displayMinimalist" type="text" value="0">
+        <button onclick="clearDisplayMinimalist()">C</button>
+        <button onclick="appendSymbolMinimalist('7')">7</button>
+        <button onclick="appendSymbolMinimalist('8')">8</button>
+        <button onclick="appendSymbolMinimalist('9')">9</button>
+        <button onclick="appendSymbolMinimalist('/')">/</button>
+        <button onclick="appendSymbolMinimalist('4')">4</button>
+        <button onclick="appendSymbolMinimalist('5')">5</button>
+        <button onclick="appendSymbolMinimalist('6')">6</button>
+        <button onclick="appendSymbolMinimalist('-')">-</button>
+        <button onclick="appendSymbolMinimalist('1')">1</button>
+        <button onclick="appendSymbolMinimalist('2')">2</button>
+        <button onclick="appendSymbolMinimalist('3')">3</button>
+        <button onclick="appendSymbolMinimalist('*')">*</button>
+        <button onclick="appendSymbolMinimalist('0')">0</button>
+        <button onclick="appendSymbolMinimalist('.')">.</button>
+        <button onclick="calculateMinimalist()">=</button>
+        <button onclick="appendSymbolMinimalist('+')">+</button>
+      </div>
       
       <script>
+        function switchCalculator() {
+          const toggle = document.getElementById('calculatorToggle').value;
+          document.getElementById('handcodedv0Calc').style.display = toggle === 'handcodedv0' ? 'block' : 'none';
+          document.getElementById('simpleCalc').style.display = toggle === 'simple' ? 'block' : 'none';
+          document.getElementById('basicCalc').style.display = toggle === 'basic' ? 'block' : 'none';
+          document.getElementById('minimalistCalc').style.display = toggle === 'minimalist' ? 'block' : 'none';
+        }
+
+        // Hand Coded V0 Calculator Functions
         function appendSymbol(symbol) {
           const display = document.getElementById('display');
           if (display.value === '0') {
@@ -43,6 +132,75 @@
         
         function clearDisplay() {
           document.getElementById('display').value = '0';
+        }
+
+        // Simple Calculator Functions
+        function appendSymbolSimple(symbol) {
+          const display = document.getElementById('displaySimple');
+          if (display.value === '0') {
+            display.value = symbol;
+          } else {
+            display.value += symbol;
+          }
+        }
+        
+        function calculateSimple() {
+          const display = document.getElementById('displaySimple');
+          try {
+            display.value = eval(display.value);
+          } catch (e) {
+            display.value = 'Error';
+          }
+        }
+        
+        function clearDisplaySimple() {
+          document.getElementById('displaySimple').value = '0';
+        }
+
+        // Basic Minimal Calculator Functions
+        function appendSymbolBasic(symbol) {
+          const display = document.getElementById('displayBasic');
+          if (display.value === '0') {
+            display.value = symbol;
+          } else {
+            display.value += symbol;
+          }
+        }
+        
+        function calculateBasic() {
+          const display = document.getElementById('displayBasic');
+          try {
+            display.value = eval(display.value);
+          } catch (e) {
+            display.value = 'Error';
+          }
+        }
+        
+        function clearDisplayBasic() {
+          document.getElementById('displayBasic').value = '0';
+        }
+
+        // Minimalist Calculator Functions
+        function appendSymbolMinimalist(symbol) {
+          const display = document.getElementById('displayMinimalist');
+          if (display.value === '0') {
+            display.value = symbol;
+          } else {
+            display.value += symbol;
+          }
+        }
+        
+        function calculateMinimalist() {
+          const display = document.getElementById('displayMinimalist');
+          try {
+            display.value = eval(display.value);
+          } catch (e) {
+            display.value = 'Error';
+          }
+        }
+        
+        function clearDisplayMinimalist() {
+          document.getElementById('displayMinimalist').value = '0';
         }
       </script>
     </body>
