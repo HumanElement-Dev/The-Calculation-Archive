@@ -7,6 +7,7 @@
           <option value="simple">Simple (4-Function)</option>
           <option value="minimalist">Minimalist no style</option>
           <option value="basic">Basic Minimal</option>
+          <option value="windows31">Windows 3.1</option>
         </select>
       </div>
 
@@ -101,6 +102,34 @@
         <button onclick="calculateMinimalist()">=</button>
         <button onclick="appendSymbolMinimalist('+')">+</button>
       </div>
+
+      <!-- Windows 3.1 Calculator -->
+      <div id="windows31Calc" style="display:none;margin-top:20px;">
+        <div style="width:200px;margin:0 auto;background:#c0c0c0;border:2px solid;border-color:#dfdfdf #808080 #808080 #dfdfdf;padding:4px;font-family:'MS Sans Serif',Arial,sans-serif;box-shadow:inset 1px 1px 0 #ffffff,inset -1px -1px 0 #808080;">
+          <div style="background:#c0c0c0;padding:4px;border-bottom:1px solid #dfdfdf;margin-bottom:6px;">
+            <input id="displayWin31" type="text" value="0" readonly style="width:100%;box-sizing:border-box;padding:2px;font-size:18px;font-weight:bold;background:#ffffff;border:1px solid;border-color:#808080 #dfdfdf #dfdfdf #808080;text-align:right;font-family:monospace;">
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px;">
+            <button onclick="clearDisplayWin31()" style="padding:6px;font-size:11px;border:2px solid;border-color:#dfdfdf #808080 #808080 #dfdfdf;background:#c0c0c0;cursor:pointer;font-family:'MS Sans Serif',Arial,sans-serif;font-weight:bold;">C</button>
+            <button onclick="appendSymbolWin31('7')" style="padding:6px;font-size:11px;border:2px solid;border-color:#dfdfdf #808080 #808080 #dfdfdf;background:#c0c0c0;cursor:pointer;font-family:'MS Sans Serif',Arial,sans-serif;">7</button>
+            <button onclick="appendSymbolWin31('8')" style="padding:6px;font-size:11px;border:2px solid;border-color:#dfdfdf #808080 #808080 #dfdfdf;background:#c0c0c0;cursor:pointer;font-family:'MS Sans Serif',Arial,sans-serif;">8</button>
+            <button onclick="appendSymbolWin31('9')" style="padding:6px;font-size:11px;border:2px solid;border-color:#dfdfdf #808080 #808080 #dfdfdf;background:#c0c0c0;cursor:pointer;font-family:'MS Sans Serif',Arial,sans-serif;">9</button>
+            <button onclick="appendSymbolWin31('/')" style="padding:6px;font-size:11px;border:2px solid;border-color:#dfdfdf #808080 #808080 #dfdfdf;background:#c0c0c0;cursor:pointer;font-family:'MS Sans Serif',Arial,sans-serif;">/</button>
+            <button onclick="appendSymbolWin31('4')" style="padding:6px;font-size:11px;border:2px solid;border-color:#dfdfdf #808080 #808080 #dfdfdf;background:#c0c0c0;cursor:pointer;font-family:'MS Sans Serif',Arial,sans-serif;">4</button>
+            <button onclick="appendSymbolWin31('5')" style="padding:6px;font-size:11px;border:2px solid;border-color:#dfdfdf #808080 #808080 #dfdfdf;background:#c0c0c0;cursor:pointer;font-family:'MS Sans Serif',Arial,sans-serif;">5</button>
+            <button onclick="appendSymbolWin31('6')" style="padding:6px;font-size:11px;border:2px solid;border-color:#dfdfdf #808080 #808080 #dfdfdf;background:#c0c0c0;cursor:pointer;font-family:'MS Sans Serif',Arial,sans-serif;">6</button>
+            <button onclick="appendSymbolWin31('-')" style="padding:6px;font-size:11px;border:2px solid;border-color:#dfdfdf #808080 #808080 #dfdfdf;background:#c0c0c0;cursor:pointer;font-family:'MS Sans Serif',Arial,sans-serif;">-</button>
+            <button onclick="appendSymbolWin31('1')" style="padding:6px;font-size:11px;border:2px solid;border-color:#dfdfdf #808080 #808080 #dfdfdf;background:#c0c0c0;cursor:pointer;font-family:'MS Sans Serif',Arial,sans-serif;">1</button>
+            <button onclick="appendSymbolWin31('2')" style="padding:6px;font-size:11px;border:2px solid;border-color:#dfdfdf #808080 #808080 #dfdfdf;background:#c0c0c0;cursor:pointer;font-family:'MS Sans Serif',Arial,sans-serif;">2</button>
+            <button onclick="appendSymbolWin31('3')" style="padding:6px;font-size:11px;border:2px solid;border-color:#dfdfdf #808080 #808080 #dfdfdf;background:#c0c0c0;cursor:pointer;font-family:'MS Sans Serif',Arial,sans-serif;">3</button>
+            <button onclick="appendSymbolWin31('+')" style="padding:6px;font-size:11px;border:2px solid;border-color:#dfdfdf #808080 #808080 #dfdfdf;background:#c0c0c0;cursor:pointer;font-family:'MS Sans Serif',Arial,sans-serif;">+</button>
+            <button onclick="appendSymbolWin31('0')" style="padding:6px;font-size:11px;border:2px solid;border-color:#dfdfdf #808080 #808080 #dfdfdf;background:#c0c0c0;cursor:pointer;font-family:'MS Sans Serif',Arial,sans-serif;">0</button>
+            <button onclick="appendSymbolWin31('.')" style="padding:6px;font-size:11px;border:2px solid;border-color:#dfdfdf #808080 #808080 #dfdfdf;background:#c0c0c0;cursor:pointer;font-family:'MS Sans Serif',Arial,sans-serif;">.</button>
+            <button onclick="calculateWin31()" style="padding:6px;font-size:11px;border:2px solid;border-color:#dfdfdf #808080 #808080 #dfdfdf;background:#c0c0c0;cursor:pointer;font-family:'MS Sans Serif',Arial,sans-serif;grid-column:span 2;">=</button>
+            <button onclick="appendSymbolWin31('*')" style="padding:6px;font-size:11px;border:2px solid;border-color:#dfdfdf #808080 #808080 #dfdfdf;background:#c0c0c0;cursor:pointer;font-family:'MS Sans Serif',Arial,sans-serif;">*</button>
+          </div>
+        </div>
+      </div>
       
       <script>
         function switchCalculator() {
@@ -109,6 +138,7 @@
           document.getElementById('simpleCalc').style.display = toggle === 'simple' ? 'block' : 'none';
           document.getElementById('basicCalc').style.display = toggle === 'basic' ? 'block' : 'none';
           document.getElementById('minimalistCalc').style.display = toggle === 'minimalist' ? 'block' : 'none';
+          document.getElementById('windows31Calc').style.display = toggle === 'windows31' ? 'block' : 'none';
         }
 
         // Hand Coded V0 Calculator Functions
@@ -201,6 +231,29 @@
         
         function clearDisplayMinimalist() {
           document.getElementById('displayMinimalist').value = '0';
+        }
+
+        // Windows 3.1 Calculator Functions
+        function appendSymbolWin31(symbol) {
+          const display = document.getElementById('displayWin31');
+          if (display.value === '0') {
+            display.value = symbol;
+          } else {
+            display.value += symbol;
+          }
+        }
+        
+        function calculateWin31() {
+          const display = document.getElementById('displayWin31');
+          try {
+            display.value = eval(display.value);
+          } catch (e) {
+            display.value = 'Error';
+          }
+        }
+        
+        function clearDisplayWin31() {
+          document.getElementById('displayWin31').value = '0';
         }
       </script>
     </body>
