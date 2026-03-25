@@ -1,0 +1,130 @@
+/* Shared styles for all calculator exhibit pages */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #0c0c0c;
+  color: #d4d0c8;
+  font-family: Georgia, 'Times New Roman', serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ── Nav ── */
+
+.nav {
+  width: 100%;
+  padding: 16px 28px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.nav a {
+  color: #555;
+  text-decoration: none;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: color 0.15s;
+}
+
+.nav a:hover {
+  color: #a0a0a0;
+}
+
+.nav a::before {
+  content: '← ';
+}
+
+/* ── Exhibit stage ── */
+
+.stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px 40px;
+}
+
+/* ── Placard (museum info below calculator) ── */
+
+.placard {
+  margin-top: 40px;
+  max-width: 420px;
+  text-align: center;
+  border-top: 1px solid #1e1e1e;
+  padding-top: 24px;
+}
+
+.placard h1 {
+  font-size: 1.1rem;
+  font-weight: normal;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #c0bcb4;
+  margin-bottom: 4px;
+}
+
+.placard .meta {
+  font-size: 0.72rem;
+  color: #444;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.placard p {
+  font-size: 0.82rem;
+  color: #555;
+  line-height: 1.7;
+  font-style: italic;
+}
+
+/* ── Photo-overlay calculator base ── */
+
+.calc-photo {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+}
+
+.calc-photo img {
+  display: block;
+  max-height: 70vh;
+  width: auto;
+  border-radius: 2px;
+}
+
+.calc-photo .key {
+  position: absolute;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 2px;
+  padding: 0;
+  transition: filter 0.05s, transform 0.05s;
+}
+
+.calc-photo .key:active {
+  transform: translateY(1px) scale(0.97);
+  filter: brightness(0.8);
+}
+
+.calc-photo .screen {
+  position: absolute;
+  background: transparent;
+  border: none;
+  text-align: right;
+  font-family: monospace;
+  color: #111;
+  outline: none;
+  pointer-events: none;
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minimalist — The Calculation Archive</title>
+  <link rel="stylesheet" href="../css/calculator.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="../index.html">The Calculation Archive</a>
+  </nav>
+
+  <div class="stage">
+
+    <div>
+      <input id="display" type="text" value="0" readonly>
+      <button onclick="calc.clear()">C</button><br>
+      <button onclick="calc.press('7')">7</button>
+      <button onclick="calc.press('8')">8</button>
+      <button onclick="calc.press('9')">9</button>
+      <button onclick="calc.press('/')">/</button><br>
+      <button onclick="calc.press('4')">4</button>
+      <button onclick="calc.press('5')">5</button>
+      <button onclick="calc.press('6')">6</button>
+      <button onclick="calc.press('-')">-</button><br>
+      <button onclick="calc.press('1')">1</button>
+      <button onclick="calc.press('2')">2</button>
+      <button onclick="calc.press('3')">3</button>
+      <button onclick="calc.press('*')">*</button><br>
+      <button onclick="calc.press('0')">0</button>
+      <button onclick="calc.press('.')">.</button>
+      <button onclick="calc.equals()">=</button>
+      <button onclick="calc.press('+')">+</button>
+    </div>
+
+    <div class="placard">
+      <h1>Minimalist</h1>
+      <div class="meta">Digital · No Style</div>
+      <p>
+        Raw HTML with zero CSS. Every element rendered in the browser's
+        built-in default style. A reminder that structure precedes presentation —
+        and that a calculator existed before design did.
+      </p>
+    </div>
+
+  </div>
+
+  <script src="../js/calc.js"></script>
+  <script>
+    const calc = new Calc('display');
+  </script>
+
+</body>
+</html>
