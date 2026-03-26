@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basic 4-Function — The Calculation Archive</title>
+  <link rel="stylesheet" href="../css/calculator.css">
+  <style>
+    .basic {
+      width: 280px;
+      border: 1px solid #333;
+      padding: 12px;
+      background: #f5f5f5;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+
+    .basic input {
+      width: 100%;
+      padding: 8px;
+      font-size: 22px;
+      border: 1px solid #ccc;
+      text-align: right;
+      margin-bottom: 10px;
+      font-family: monospace;
+    }
+
+    .basic-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 5px;
+    }
+
+    .basic-grid button {
+      padding: 14px 0;
+      font-size: 15px;
+      border: 1px solid #999;
+      background: #fff;
+      cursor: pointer;
+      transition: background 0.08s;
+    }
+
+    .basic-grid button:hover { background: #f0f0f0; }
+    .basic-grid button:active { background: #e0e0e0; transform: scale(0.97); }
+
+    .basic-grid button.btn-clear { background: #e0e0e0; }
+    .basic-grid button.btn-equals { background: #90EE90; grid-column: span 2; }
+    .basic-grid button.btn-equals:hover { background: #7ddf7d; }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="../index.html">The Calculation Archive</a>
+  </nav>
+
+  <div class="stage">
+
+    <div class="basic">
+      <input id="display" type="text" value="0" readonly>
+      <div class="basic-grid">
+        <button class="btn-clear" onclick="calc.clear()">C</button>
+        <button onclick="calc.press('7')">7</button>
+        <button onclick="calc.press('8')">8</button>
+        <button onclick="calc.press('9')">9</button>
+
+        <button onclick="calc.press('/')">/</button>
+        <button onclick="calc.press('4')">4</button>
+        <button onclick="calc.press('5')">5</button>
+        <button onclick="calc.press('6')">6</button>
+
+        <button onclick="calc.press('-')">-</button>
+        <button onclick="calc.press('1')">1</button>
+        <button onclick="calc.press('2')">2</button>
+        <button onclick="calc.press('3')">3</button>
+
+        <button onclick="calc.press('*')">*</button>
+        <button onclick="calc.press('0')">0</button>
+        <button onclick="calc.press('.')">.</button>
+        <button class="btn-equals" onclick="calc.equals()">=</button>
+        <button onclick="calc.press('+')">+</button>
+      </div>
+    </div>
+
+    <div class="placard">
+      <h1>Basic 4-Function</h1>
+      <div class="meta">Digital · CSS Grid Layout</div>
+      <p>
+        A clean, modern grid-based layout using CSS Grid for button arrangement.
+        Demonstrates how structured HTML and a handful of CSS rules produce
+        a usable calculator with no images or external dependencies.
+      </p>
+    </div>
+
+  </div>
+
+  <script src="../js/calc.js"></script>
+  <script>
+    const calc = new Calc('display');
+  </script>
+
+</body>
+</html>

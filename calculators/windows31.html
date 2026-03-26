@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Windows 3.1 Calculator — The Calculation Archive</title>
+  <link rel="stylesheet" href="../css/calculator.css">
+  <style>
+    .win31 {
+      width: 220px;
+      background: #c0c0c0;
+      border: 2px solid;
+      border-color: #dfdfdf #808080 #808080 #dfdfdf;
+      padding: 6px;
+      font-family: 'MS Sans Serif', Arial, sans-serif;
+      box-shadow:
+        inset 1px 1px 0 #ffffff,
+        inset -1px -1px 0 #808080,
+        4px 4px 12px rgba(0,0,0,0.6);
+    }
+
+    .win31-titlebar {
+      background: #000080;
+      color: #fff;
+      font-size: 11px;
+      font-weight: bold;
+      padding: 2px 4px;
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .win31-titlebar .close {
+      background: #c0c0c0;
+      border: 1px solid;
+      border-color: #dfdfdf #808080 #808080 #dfdfdf;
+      font-size: 9px;
+      width: 16px;
+      height: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: default;
+    }
+
+    .win31-display {
+      background: #ffffff;
+      border: 1px solid;
+      border-color: #808080 #dfdfdf #dfdfdf #808080;
+      text-align: right;
+      padding: 2px 6px;
+      font-size: 20px;
+      font-weight: bold;
+      font-family: monospace;
+      margin-bottom: 8px;
+      min-height: 30px;
+      line-height: 26px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .win31-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3px;
+    }
+
+    .win31-grid button {
+      padding: 5px 4px;
+      font-size: 11px;
+      font-family: 'MS Sans Serif', Arial, sans-serif;
+      background: #c0c0c0;
+      border: 2px solid;
+      border-color: #dfdfdf #808080 #808080 #dfdfdf;
+      cursor: pointer;
+      box-shadow: inset 1px 1px 0 #ffffff;
+      min-height: 28px;
+    }
+
+    .win31-grid button:active {
+      border-color: #808080 #dfdfdf #dfdfdf #808080;
+      box-shadow: inset 1px 1px 0 #808080;
+      padding-top: 6px;
+      padding-left: 5px;
+    }
+
+    .win31-grid button.btn-action {
+      font-weight: bold;
+      color: #800000;
+    }
+
+    .win31-grid button.btn-equals {
+      grid-column: span 2;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="../index.html">The Calculation Archive</a>
+  </nav>
+
+  <div class="stage">
+
+    <div class="win31">
+      <div class="win31-titlebar">
+        <span>Calculator</span>
+        <span class="close">&#x2715;</span>
+      </div>
+
+      <div class="win31-display" id="display">0</div>
+
+      <div class="win31-grid">
+        <button class="btn-action" onclick="calc.clear()">C</button>
+        <button onclick="calc.press('7')">7</button>
+        <button onclick="calc.press('8')">8</button>
+        <button onclick="calc.press('9')">9</button>
+
+        <button class="btn-action" onclick="calc.press('/')">/</button>
+        <button onclick="calc.press('4')">4</button>
+        <button onclick="calc.press('5')">5</button>
+        <button onclick="calc.press('6')">6</button>
+
+        <button class="btn-action" onclick="calc.press('-')">-</button>
+        <button onclick="calc.press('1')">1</button>
+        <button onclick="calc.press('2')">2</button>
+        <button onclick="calc.press('3')">3</button>
+
+        <button class="btn-action" onclick="calc.press('+')">+</button>
+        <button onclick="calc.press('0')">0</button>
+        <button onclick="calc.press('.')">.</button>
+        <button class="btn-action btn-equals" onclick="calc.equals()">=</button>
+
+        <button class="btn-action" onclick="calc.press('*')">*</button>
+      </div>
+    </div>
+
+    <div class="placard">
+      <h1>Windows 3.1 Calculator</h1>
+      <div class="meta">1992 · Microsoft · Software UI Recreation</div>
+      <p>
+        Shipped with Microsoft Windows 3.1 in 1992, this calculator was millions of users'
+        first encounter with a desktop GUI application. Recreated here in pure HTML and CSS,
+        including the beveled 3D borders characteristic of the Win32 visual style.
+      </p>
+    </div>
+
+  </div>
+
+  <script src="../js/calc.js"></script>
+  <script>
+    // Wire display to a div instead of an input
+    const displayEl = document.getElementById('display');
+    const calc = new Calc(null);
+    calc.display = {
+      get value() { return displayEl.textContent; },
+      set value(v) { displayEl.textContent = v; }
+    };
+    calc.display.value = '0';
+  </script>
+
+</body>
+</html>

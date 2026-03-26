@@ -1,0 +1,311 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #0c0c0c;
+  color: #d4d0c8;
+  font-family: Georgia, 'Times New Roman', serif;
+  min-height: 100vh;
+}
+
+/* ── Header ── */
+
+header {
+  padding: 60px 40px 40px;
+  border-bottom: 1px solid #222;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 2.4rem;
+  font-weight: normal;
+  letter-spacing: 0.12em;
+  color: #f0ece0;
+  text-transform: uppercase;
+}
+
+header p {
+  margin-top: 10px;
+  font-size: 0.95rem;
+  color: #666;
+  letter-spacing: 0.06em;
+  font-style: italic;
+}
+
+/* ── Gallery grid ── */
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2px;
+  padding: 2px;
+  margin-top: 2px;
+}
+
+/* ── Card ── */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: #111;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.card:hover {
+  background: #161616;
+}
+
+.card:hover .thumbnail {
+  filter: brightness(1.08);
+}
+
+.card--coming-soon {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ── Thumbnail area ── */
+
+.thumbnail {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: filter 0.2s;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Windows 3.1 thumbnail */
+.win31-thumb {
+  background: #c0c0c0;
+  padding: 12px;
+}
+
+.win31-thumb .thumb-inner {
+  width: 100%;
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #dfdfdf #808080 #808080 #dfdfdf;
+  padding: 6px;
+  font-family: 'MS Sans Serif', Arial, sans-serif;
+}
+
+.win31-thumb .thumb-display {
+  background: #fff;
+  border: 1px solid;
+  border-color: #808080 #dfdfdf #dfdfdf #808080;
+  text-align: right;
+  padding: 3px 6px;
+  font-size: 13px;
+  font-family: monospace;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.win31-thumb .thumb-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+}
+
+.win31-thumb .thumb-grid span {
+  background: #c0c0c0;
+  border: 1px solid;
+  border-color: #dfdfdf #808080 #808080 #dfdfdf;
+  font-size: 9px;
+  text-align: center;
+  padding: 3px 2px;
+  font-family: 'MS Sans Serif', Arial, sans-serif;
+}
+
+/* Basic thumbnail */
+.basic-thumb {
+  background: #f5f5f5;
+  padding: 16px;
+}
+
+.basic-thumb .thumb-inner {
+  width: 100%;
+  border: 1px solid #333;
+  background: #f5f5f5;
+  padding: 8px;
+}
+
+.basic-thumb .thumb-display {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 4px 8px;
+  font-size: 14px;
+  text-align: right;
+  margin-bottom: 6px;
+  font-family: monospace;
+}
+
+.basic-thumb .thumb-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3px;
+}
+
+.basic-thumb .thumb-grid span {
+  background: #fff;
+  border: 1px solid #999;
+  font-size: 9px;
+  text-align: center;
+  padding: 3px;
+}
+
+/* Handcoded V0 thumbnail */
+.v0-thumb {
+  background: #1a1a1a;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.v0-thumb .thumb-display {
+  background: transparent;
+  border: 2px solid #555;
+  color: #fff;
+  font-size: 18px;
+  text-align: center;
+  padding: 4px 12px;
+  font-family: monospace;
+}
+
+.v0-thumb .thumb-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+}
+
+.v0-thumb .thumb-grid span {
+  background: #2a2a2a;
+  border: 1px solid #444;
+  color: #ccc;
+  font-size: 9px;
+  text-align: center;
+  padding: 4px;
+  font-family: sans-serif;
+}
+
+/* Simple thumbnail */
+.simple-thumb {
+  background: #fafafa;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+}
+
+.simple-thumb .thumb-display {
+  background: #fff;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  text-align: center;
+  padding: 4px;
+  font-family: monospace;
+  width: 100%;
+}
+
+.simple-thumb .thumb-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3px;
+  width: 100%;
+}
+
+.simple-thumb .thumb-grid span {
+  background: #fff;
+  border: 1px solid #ddd;
+  font-size: 8px;
+  text-align: center;
+  padding: 4px 2px;
+}
+
+/* Minimalist thumbnail */
+.minimalist-thumb {
+  background: #fff;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 16px;
+  gap: 4px;
+}
+
+.minimalist-thumb span {
+  font-size: 11px;
+  color: #333;
+  font-family: sans-serif;
+}
+
+/* Photorealistic placeholder */
+.photo-thumb {
+  background: #181818;
+  border: 1px dashed #333;
+  flex-direction: column;
+  gap: 12px;
+  color: #444;
+}
+
+.photo-thumb .thumb-icon {
+  font-size: 2.5rem;
+  color: #333;
+}
+
+.photo-thumb .thumb-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #444;
+}
+
+/* ── Card info panel ── */
+
+.info {
+  padding: 20px 22px 24px;
+  border-top: 1px solid #1c1c1c;
+  flex: 1;
+}
+
+.info h2 {
+  font-size: 1rem;
+  font-weight: normal;
+  color: #e8e4dc;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+.info .year {
+  font-size: 0.72rem;
+  color: #555;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.info p {
+  font-size: 0.8rem;
+  color: #555;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+/* ── Divider cards for eras ── */
+
+.era-label {
+  grid-column: 1 / -1;
+  padding: 18px 22px 8px;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #333;
+  border-bottom: 1px solid #1a1a1a;
+}

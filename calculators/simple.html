@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple 4-Function — The Calculation Archive</title>
+  <link rel="stylesheet" href="../css/calculator.css">
+  <style>
+    .simple {
+      display: inline-block;
+      text-align: center;
+    }
+
+    .simple-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .simple-top button {
+      font-size: 28px;
+      width: 80px;
+      height: 50px;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      background: #f0f0f0;
+    }
+
+    .simple-top input {
+      font-size: 28px;
+      text-align: center;
+      width: 240px;
+      height: 50px;
+      border: 1px solid #ccc;
+      font-family: monospace;
+    }
+
+    .simple-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 140px);
+      gap: 6px;
+    }
+
+    .simple-grid button {
+      height: 70px;
+      font-size: 24px;
+      cursor: pointer;
+      border: 1px solid #ddd;
+      background: #fff;
+      transition: background 0.08s;
+    }
+
+    .simple-grid button:hover { background: #f8f8f8; }
+    .simple-grid button:active { background: #eee; }
+    .simple-grid button.btn-equals { grid-column: span 2; }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="../index.html">The Calculation Archive</a>
+  </nav>
+
+  <div class="stage">
+
+    <div class="simple">
+      <div class="simple-top">
+        <button onclick="calc.clear()">C</button>
+        <input id="display" type="text" value="0" readonly>
+      </div>
+      <div class="simple-grid">
+        <button onclick="calc.press('7')">7</button>
+        <button onclick="calc.press('8')">8</button>
+        <button onclick="calc.press('9')">9</button>
+        <button onclick="calc.press('/')">÷</button>
+
+        <button onclick="calc.press('4')">4</button>
+        <button onclick="calc.press('5')">5</button>
+        <button onclick="calc.press('6')">6</button>
+        <button onclick="calc.press('-')">−</button>
+
+        <button onclick="calc.press('1')">1</button>
+        <button onclick="calc.press('2')">2</button>
+        <button onclick="calc.press('3')">3</button>
+        <button onclick="calc.press('+')">+</button>
+
+        <button onclick="calc.press('0')">0</button>
+        <button class="btn-equals" onclick="calc.equals()">=</button>
+      </div>
+    </div>
+
+    <div class="placard">
+      <h1>Simple 4-Function</h1>
+      <div class="meta">Digital · Wide Layout</div>
+      <p>
+        A large-button layout with Unicode operators (÷, −) for visual clarity.
+        Wide keys reduce input errors and give the interface an approachable,
+        open feel.
+      </p>
+    </div>
+
+  </div>
+
+  <script src="../js/calc.js"></script>
+  <script>
+    const calc = new Calc('display');
+  </script>
+
+</body>
+</html>
