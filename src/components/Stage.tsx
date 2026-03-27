@@ -1,9 +1,11 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useRef } from 'react'
 import { CALCULATORS } from '../data/calculators'
 import { useEngine } from '../hooks/useEngine'
 import TI30 from './calculators/TI30'
 import HP12C from './calculators/HP12C'
 import CasioFX7000G from './calculators/CasioFX7000G'
+import PhotoCalculator from './PhotoCalculator'
+import { skin as sharpSkin, photos as sharpPhotos } from '../skins/sharp-qt8d'
 import Picker from './Picker'
 
 type AnimPhase = 'idle' | 'out' | 'in'
@@ -70,6 +72,15 @@ function CalcWrapper({
       {calcId === 'ti30' && <TI30 state={state} press={press} />}
       {calcId === 'hp12c' && <HP12C state={state} press={press} />}
       {calcId === 'casiofx7000g' && <CasioFX7000G state={state} press={press} />}
+      {calcId === 'sharpqt8d' && (
+        <PhotoCalculator
+          skin={sharpSkin}
+          photo={sharpPhotos.full}
+          state={state}
+          press={press}
+          width={280}
+        />
+      )}
     </div>
   )
 }

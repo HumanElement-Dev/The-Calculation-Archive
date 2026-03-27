@@ -1,0 +1,225 @@
+{
+  "meta": {
+    "id": "sharp-qt8d",
+    "name": "Sharp QT-8D",
+    "manufacturer": "Sharp",
+    "year": 1969,
+    "description": "One of the world's first battery-powered calculators. Uses a cold-cathode vacuum fluorescent display and covers basic 4-function arithmetic.",
+    "imageFile": "sharp-qt8d.png",
+    "thumbnailFile": "sharp-qt8d.png",
+    "naturalWidth": 4300,
+    "naturalHeight": 5100
+  },
+  "capabilities": {
+    "hasScientific": false,
+    "hasDegRadMode": false,
+    "hasMemory": false,
+    "hasShift": false,
+    "hasParentheses": false
+  },
+  "display": {
+    "x": 0.2483333333333333,
+    "y": 0.30075280898876405,
+    "width": 0.515,
+    "height": 0.07078651685393259,
+    "fontFamily": "\"DSEG7-Classic\", monospace",
+    "fontSize": "6.0cqw",
+    "color": "#00e5c0",
+    "backgroundColor": "transparent",
+    "textAlign": "right",
+    "padding": "0 2%",
+    "effect": "led-green"
+  },
+  "buttons": [
+    {
+      "id": "btn-7",
+      "label": "7",
+      "action": "7",
+      "x": 0.262,
+      "y": 0.5019438202247191,
+      "width": 0.08299999999999999,
+      "height": 0.068,
+      "keyboardKey": "7"
+    },
+    {
+      "id": "btn-8",
+      "label": "8",
+      "action": "8",
+      "x": 0.363,
+      "y": 0.5033483146067416,
+      "width": 0.08533333333333333,
+      "height": 0.06940449438202248,
+      "keyboardKey": "8"
+    },
+    {
+      "id": "btn-9",
+      "label": "9",
+      "action": "9",
+      "x": 0.462,
+      "y": 0.5047528089887641,
+      "width": 0.08199999999999999,
+      "height": 0.068,
+      "keyboardKey": "9"
+    },
+    {
+      "id": "btn-c",
+      "label": "C",
+      "action": "clear",
+      "x": 0.6046666666666666,
+      "y": 0.5047528089887641,
+      "width": 0.1423333333333333,
+      "height": 0.068,
+      "keyboardKey": "Escape"
+    },
+    {
+      "id": "btn-4",
+      "label": "4",
+      "action": "4",
+      "x": 0.267,
+      "y": 0.5833707865168539,
+      "width": 0.073,
+      "height": 0.067,
+      "keyboardKey": "4"
+    },
+    {
+      "id": "btn-5",
+      "label": "5",
+      "action": "5",
+      "x": 0.36633333333333334,
+      "y": 0.5819662921348315,
+      "width": 0.072,
+      "height": 0.067,
+      "keyboardKey": "5"
+    },
+    {
+      "id": "btn-6",
+      "label": "6",
+      "action": "6",
+      "x": 0.467,
+      "y": 0.5819662921348315,
+      "width": 0.072,
+      "height": 0.067,
+      "keyboardKey": "6"
+    },
+    {
+      "id": "btn-sub-top",
+      "label": "−",
+      "action": "subtract",
+      "x": 0.5996666666666666,
+      "y": 0.577752808988764,
+      "width": 0.07733333333333332,
+      "height": 0.06770786516853933,
+      "keyboardKey": "-",
+      "splitGroup": "btn-sub",
+      "splitHalf": "top"
+    },
+    {
+      "id": "btn-sub-bot",
+      "label": "=",
+      "action": "equals",
+      "x": 0.6796666666666666,
+      "y": 0.5794494382022471,
+      "width": 0.057333333333333326,
+      "height": 0.06530337078651685,
+      "keyboardKey": "Enter",
+      "splitGroup": "btn-sub",
+      "splitHalf": "bottom"
+    },
+    {
+      "id": "btn-1",
+      "label": "1",
+      "action": "1",
+      "x": 0.26866666666666666,
+      "y": 0.6595842696629213,
+      "width": 0.073,
+      "height": 0.065,
+      "keyboardKey": "1"
+    },
+    {
+      "id": "btn-2",
+      "label": "2",
+      "action": "2",
+      "x": 0.36633333333333334,
+      "y": 0.6609887640449438,
+      "width": 0.072,
+      "height": 0.065,
+      "keyboardKey": "2"
+    },
+    {
+      "id": "btn-3",
+      "label": "3",
+      "action": "3",
+      "x": 0.4703333333333334,
+      "y": 0.6623932584269663,
+      "width": 0.072,
+      "height": 0.065,
+      "keyboardKey": "3"
+    },
+    {
+      "id": "btn-mul-top",
+      "label": "×",
+      "action": "multiply",
+      "x": 0.5996666666666666,
+      "y": 0.6567752808988764,
+      "width": 0.08066666666666666,
+      "height": 0.06992134831460675,
+      "keyboardKey": "*",
+      "splitGroup": "btn-mul",
+      "splitHalf": "top"
+    },
+    {
+      "id": "btn-mul-bot",
+      "label": "÷",
+      "action": "divide",
+      "x": 0.6763333333333333,
+      "y": 0.660685393258427,
+      "width": 0.06899999999999999,
+      "height": 0.06389887640449438,
+      "splitGroup": "btn-mul",
+      "splitHalf": "bottom"
+    },
+    {
+      "id": "btn-0",
+      "label": "0",
+      "action": "0",
+      "x": 0.25433333333333336,
+      "y": 0.7410112359550562,
+      "width": 0.13466666666666666,
+      "height": 0.07361797752808989,
+      "keyboardKey": "0"
+    },
+    {
+      "id": "btn-dot",
+      "label": "•",
+      "action": "decimal",
+      "x": 0.41133333333333333,
+      "y": 0.7410112359550561,
+      "width": 0.133,
+      "height": 0.07361797752808989,
+      "keyboardKey": "."
+    },
+    {
+      "id": "btn-add-top",
+      "label": "+",
+      "action": "add",
+      "x": 0.6079999999999999,
+      "y": 0.7410112359550562,
+      "width": 0.07233333333333332,
+      "height": 0.07051685393258428,
+      "keyboardKey": "+",
+      "splitGroup": "btn-add",
+      "splitHalf": "top"
+    },
+    {
+      "id": "btn-add-bot",
+      "label": "=",
+      "action": "equals",
+      "x": 0.6796666666666665,
+      "y": 0.7413033707865169,
+      "width": 0.07566666666666666,
+      "height": 0.0691123595505618,
+      "splitGroup": "btn-add",
+      "splitHalf": "bottom"
+    }
+  ]
+}

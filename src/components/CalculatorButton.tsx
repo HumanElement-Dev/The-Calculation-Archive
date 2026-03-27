@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 type Variant = 'num' | 'op' | 'fn' | 'eq' | 'clear'
-type CalcFamily = 'ti' | 'hp' | 'casio'
+type CalcFamily = 'ti' | 'hp' | 'casio' | 'sharp'
 
 interface ButtonDef {
   bg: string
@@ -171,7 +171,60 @@ const CA: Record<Variant, ButtonDef> = {
   },
 }
 
-const DEFS: Record<CalcFamily, Record<Variant, ButtonDef>> = { ti: TI, hp: HP, casio: CA }
+// Sharp micro Compet — light grey body, white/cream keys, blue 0/., red −=
+const SH: Record<Variant, ButtonDef> = {
+  // num: white/cream — all standard keys (7-9, 4-6, 1-3, C, ×÷, +=)
+  num: {
+    bg: 'linear-gradient(175deg, #e6e4dc 0%, #d4d2ca 100%)',
+    color: '#1a1a18',
+    bottomFace: '#9a9890',
+    topHighlight: 'rgba(255,255,255,0.55)',
+    fontSize: '14px',
+    height: '38px',
+    borderRadius: '7px',
+  },
+  // fn: blue — 0 and decimal point
+  fn: {
+    bg: 'linear-gradient(175deg, #5a7ec8 0%, #4a6ab8 100%)',
+    color: '#ffffff',
+    bottomFace: '#283e70',
+    topHighlight: 'rgba(255,255,255,0.18)',
+    fontSize: '14px',
+    height: '38px',
+    borderRadius: '7px',
+  },
+  // clear: red — the −= key
+  clear: {
+    bg: 'linear-gradient(175deg, #c83830 0%, #b02e28 100%)',
+    color: '#ffffff',
+    bottomFace: '#601810',
+    topHighlight: 'rgba(255,255,255,0.12)',
+    fontSize: '13px',
+    height: '38px',
+    borderRadius: '7px',
+  },
+  // op/eq not used on Sharp, fallback to neutral
+  op: {
+    bg: 'linear-gradient(175deg, #e6e4dc 0%, #d4d2ca 100%)',
+    color: '#1a1a18',
+    bottomFace: '#9a9890',
+    topHighlight: 'rgba(255,255,255,0.55)',
+    fontSize: '14px',
+    height: '38px',
+    borderRadius: '7px',
+  },
+  eq: {
+    bg: 'linear-gradient(175deg, #e6e4dc 0%, #d4d2ca 100%)',
+    color: '#1a1a18',
+    bottomFace: '#9a9890',
+    topHighlight: 'rgba(255,255,255,0.55)',
+    fontSize: '14px',
+    height: '38px',
+    borderRadius: '7px',
+  },
+}
+
+const DEFS: Record<CalcFamily, Record<Variant, ButtonDef>> = { ti: TI, hp: HP, casio: CA, sharp: SH }
 
 // ---------------------------------------------------------------------------
 // Shadow builder — the core technique
@@ -179,7 +232,7 @@ const DEFS: Record<CalcFamily, Record<Variant, ButtonDef>> = { ti: TI, hp: HP, c
 // On press, translateY collapses the key down by exactly that amount.
 // ---------------------------------------------------------------------------
 
-const DEPTH = { ti: 4, hp: 4, casio: 3 }
+const DEPTH = { ti: 4, hp: 4, casio: 3, sharp: 5 }
 
 function buildShadow(def: ButtonDef, family: CalcFamily, pressed: boolean): string {
   const d = DEPTH[family]
@@ -229,6 +282,8 @@ export default function CalculatorButton({
       ? 'rgba(120,165,240,0.72)'
       : calcFamily === 'hp'
       ? 'rgba(235,165,60,0.72)'
+      : calcFamily === 'sharp'
+      ? 'rgba(60,60,55,0.55)'
       : 'rgba(105,205,135,0.72)'
 
   const btnStyle: React.CSSProperties = {
