@@ -1,43 +1,51 @@
 import { useState } from 'react'
-import Stage from './components/Stage'
-import SkinEditor from './components/SkinEditor'
-import { skin as sharpSkin, photos as sharpPhotos } from './skins/sharp-qt8d'
+import TopBar      from './components/TopBar'
+import Sidebar     from './components/Sidebar'
+import Stage       from './components/Stage'
+import InfoPanel   from './components/InfoPanel'
+import BrowseStrip from './components/BrowseStrip'
+import { CALCULATORS } from './data/calculators'
 
 export default function App() {
-  const [editorOpen, setEditorOpen] = useState(false)
+  const [activeId,       setActiveId]       = useState('ti30')
+  const [infoPanelOpen,  setInfoPanelOpen]  = useState(true)
 
-  if (editorOpen) {
-    return (
-      <SkinEditor
-        skin={sharpSkin}
-        photo={sharpPhotos.full}
-        onClose={() => setEditorOpen(false)}
-      />
-    )
-  }
+  const activeMeta = CALCULATORS.find((c) => c.id === activeId)!
 
   return (
-    <>
-      <Stage />
-      <button
-        onClick={() => setEditorOpen(true)}
-        style={{
-          position: 'fixed',
-          bottom: 20,
-          right: 20,
-          background: 'rgba(255,255,255,0.08)',
-          color: 'rgba(255,255,255,0.5)',
-          border: '1px solid rgba(255,255,255,0.12)',
-          borderRadius: 6,
-          padding: '8px 14px',
-          fontSize: 11,
-          fontFamily: "'DM Mono', monospace",
-          cursor: 'pointer',
-          letterSpacing: '0.1em',
-        }}
-      >
-        Edit Skin
-      </button>
-    </>
+    <div
+      style={{
+        width: '100vw',
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        background: 'var(--app-bg)',
+        overflow: 'hidden',
+      }}
+    >
+      {/* ── Top bar ───────────────────────────────────────────────────────── */}
+      <TopBar
+        infoPanelOpen={infoPanelOpen}
+        onToggleInfo={() => setInfoPanelOpen((v) => !v)}
+      />
+
+      {/* ── Body row ──────────────────────────────────────────────────────── */}
+      <div style={{ flex: 1, display: 'flex', overflow: 'hidden', minHeight: 0 }}>
+        <Sidebar activeId={activeId} onSelect={setActiveId} />
+
+        {/* Calculator hero — gets all remaining space */}
+        <Stage activeId={activeId} />
+
+        {/* Info panel slides in from the right */}
+        <InfoPanel
+          calc={activeMeta}
+          isOpen={infoPanelOpen}
+          onClose={() => setInfoPanelOpen(false)}
+        />
+      </div>
+
+      {/* ── Browse strip ──────────────────────────────────────────────────── */}
+      <BrowseStrip activeId={activeId} onSelect={setActiveId} />
+    </div>
   )
 }

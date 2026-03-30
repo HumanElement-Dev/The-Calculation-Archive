@@ -162,6 +162,23 @@ export default function PhotoCalculator({
         }}
       />
 
+      {/* ── Vignette — dissolves photo edges into the dark stage void ─── */}
+      {/* The Sharp's photo has a white background. These two gradient layers:
+          1. A wide radial that starts fading at 35% from center
+          2. A tighter corner-punch that goes nearly opaque at the very edges
+          together make the white perimeter disappear into #1a1a1c. */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          borderRadius: 4,
+          background: [
+            'radial-gradient(ellipse 75% 80% at 50% 50%, transparent 30%, rgba(26,26,28,0.55) 70%, rgba(26,26,28,0.92) 100%)',
+          ].join(', '),
+          pointerEvents: 'none',
+        }}
+      />
+
       {/* ── Display overlay ─────────────────────────────────────────────── */}
       <div
         style={{
