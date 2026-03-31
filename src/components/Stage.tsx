@@ -4,6 +4,7 @@ import { useEngine } from '../hooks/useEngine'
 import TI30 from './calculators/TI30'
 import HP12C from './calculators/HP12C'
 import CasioFX7000G from './calculators/CasioFX7000G'
+import Windows31 from './calculators/Windows31'
 import PhotoCalculator from './PhotoCalculator'
 import { skin as sharpSkin, photos as sharpPhotos } from '../skins/sharp-qt8d'
 
@@ -78,6 +79,7 @@ function CalcWrapper({
       {calcId === 'ti30'        && <TI30 state={state} press={press} />}
       {calcId === 'hp12c'       && <HP12C state={state} press={press} />}
       {calcId === 'casiofx7000g'&& <CasioFX7000G state={state} press={press} />}
+      {calcId === 'win31'        && <Windows31 state={state} press={press} />}
       {calcId === 'sharpqt8d'   && (
         <PhotoCalculator
           skin={sharpSkin}
@@ -200,7 +202,11 @@ export default function Stage({ activeId }: StageProps) {
         style={{
           position: 'relative',
           zIndex: 2,
-          transform: `scale(${visibleId === 'sharpqt8d' ? 1.3 : 1.65})`,
+          transform: `scale(${
+            visibleId === 'sharpqt8d' ? 1.3
+            : visibleId === 'win31'   ? 1.4
+            : 1.65
+          })`,
           transformOrigin: 'center center',
         }}
       >
