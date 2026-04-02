@@ -25,10 +25,14 @@ function CalcWrapper({
   // Base perspective tilt
   const BASE_TRANSFORM  = 'perspective(1100px) rotateX(3deg)'
   const HOVER_TRANSFORM = 'perspective(1100px) rotateX(1deg)'
-  const BASE_SHADOW =
-    'drop-shadow(0 44px 80px rgba(0,0,0,0.88)) drop-shadow(0 8px 18px rgba(0,0,0,0.55))'
-  const HOVER_SHADOW =
-    'drop-shadow(0 64px 100px rgba(0,0,0,0.95)) drop-shadow(0 18px 32px rgba(0,0,0,0.6))'
+  // Photo-based calculators: drop-shadow traces the rectangular image boundary,
+  // making the white photo background obvious. Suppress it; the photo's own
+  // vignette handles edge softening instead.
+  const isPhoto = calcId === 'sharpqt8d'
+  const BASE_SHADOW = isPhoto ? 'none'
+    : 'drop-shadow(0 44px 80px rgba(0,0,0,0.88)) drop-shadow(0 8px 18px rgba(0,0,0,0.55))'
+  const HOVER_SHADOW = isPhoto ? 'none'
+    : 'drop-shadow(0 64px 100px rgba(0,0,0,0.95)) drop-shadow(0 18px 32px rgba(0,0,0,0.6))'
 
   // Switch animation overrides
   const animStyle: React.CSSProperties = (() => {
