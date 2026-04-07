@@ -1,268 +1,348 @@
 import { useState } from 'react'
 import { EngineState } from '../../engine/types'
 
-// ─── Win 3.1 button — proper component so useState is a valid hook ────────────
+// ─── Types ────────────────────────────────────────────────────────────────────
 
-interface Win31ButtonProps {
+type BtnColor = 'black' | 'red' | 'blue'
+
+// ─── Win 3.1 beveled button ───────────────────────────────────────────────────
+
+function W31Btn({
+  label,
+  action,
+  color = 'black',
+  disabled = false,
+  onPress,
+}: {
   label: string
   action: string
-  span?: number
-  variant?: 'normal' | 'operator' | 'equals' | 'memory' | 'clear' | 'back'
-  onPress: (action: string) => void
-}
-
-function Win31Button({ label, action, span, variant = 'normal', onPress }: Win31ButtonProps) {
+  color?: BtnColor
+  disabled?: boolean
+  onPress: (a: string) => void
+}) {
   const [pressed, setPressed] = useState(false)
 
   const textColor =
-    variant === 'operator' || variant === 'equals'
-      ? '#800000'
-      : variant === 'back' || variant === 'clear'
-      ? '#000080'
-      : '#000000'
+    disabled   ? '#a0a0a0' :
+    color === 'red'  ? '#800000' :
+    color === 'blue' ? '#000080' :
+    '#000000'
 
   return (
     <div
       role="button"
-      tabIndex={0}
       style={{
-        gridColumn: span ? `span ${span}` : undefined,
-        fontSize: '11px',
-        fontFamily: "'MS Sans Serif', Arial, sans-serif",
+        flex: 1,
+        height: 22,
+        minWidth: 0,
+        fontSize: 11,
+        fontFamily: '"MS Sans Serif", "Arial", sans-serif',
         background: '#c0c0c0',
         color: textColor,
-        border: '1.5px solid',
+        border: '1px solid',
+        // Classic Win3.1 bevel: light top-left, dark bottom-right
         borderColor: pressed
           ? '#808080 #dfdfdf #dfdfdf #808080'
-          : '#dfdfdf #808080 #808080 #dfdfdf',
-        boxShadow: pressed ? 'inset 1px 1px 0 #808080' : 'inset 1px 1px 0 #ffffff',
+          : '#ffffff #808080 #808080 #ffffff',
+        boxShadow: pressed
+          ? 'inset 1px 1px 1px rgba(0,0,0,0.2)'
+          : 'none',
         cursor: 'default',
-        minHeight: '26px',
         userSelect: 'none',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingTop: pressed ? '2px' : undefined,
-        paddingLeft: pressed ? '2px' : undefined,
+        paddingTop: pressed ? 1 : 0,
+        paddingLeft: pressed ? 1 : 0,
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
       }}
       onMouseDown={() => {
-        setPressed(true)
-        onPress(action)
+        if (!disabled) {
+          setPressed(true)
+          onPress(action)
+        }
       }}
       onMouseUp={() => setPressed(false)}
       onMouseLeave={() => setPressed(false)}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') onPress(action)
-      }}
     >
       {label}
     </div>
   )
 }
 
-// ─── Windows 3.1 Calculator ───────────────────────────────────────────────────
+// ─── Row wrapper ──────────────────────────────────────────────────────────────
 
-interface Windows31Props {
-  state: EngineState
-  press: (action: string) => void
+function Row({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{ display: 'flex', gap: 2, marginBottom: 2 }}>
+      {children}
+    </div>
+  )
 }
 
-export default function Windows31({ state, press }: Windows31Props) {
+// ─── Radio button (visual only) ───────────────────────────────────────────────
+
+function Radio({ label, checked }: { label: string; checked?: boolean }) {
+  return (
+    <span style={{
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 3,
+      fontSize: 11,
+      fontFamily: '"MS Sans Serif", Arial, sans-serif',
+      cursor: 'default',
+      userSelect: 'none',
+      whiteSpace: 'nowrap',
+      marginRight: 6,
+    }}>
+      <span style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 11,
+        height: 11,
+        borderRadius: '50%',
+        background: '#ffffff',
+        border: '1px solid',
+        borderColor: '#808080 #dfdfdf #dfdfdf #808080',
+        flexShrink: 0,
+      }}>
+        {checked && (
+          <span style={{
+            display: 'block',
+            width: 5,
+            height: 5,
+            borderRadius: '50%',
+            background: '#000',
+          }} />
+        )}
+      </span>
+      {label}
+    </span>
+  )
+}
+
+// ─── Checkbox (visual only) ───────────────────────────────────────────────────
+
+function Checkbox({ label }: { label: string }) {
+  return (
+    <span style={{
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 3,
+      fontSize: 11,
+      fontFamily: '"MS Sans Serif", Arial, sans-serif',
+      cursor: 'default',
+      userSelect: 'none',
+      flex: 1,
+    }}>
+      <span style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 11,
+        height: 11,
+        background: '#ffffff',
+        border: '1px solid',
+        borderColor: '#808080 #dfdfdf #dfdfdf #808080',
+        flexShrink: 0,
+        fontSize: 9,
+        lineHeight: 1,
+      }} />
+      {label}
+    </span>
+  )
+}
+
+// ─── Windows 3.1 Calculator ──────────────────────────────────────────────────
+
+export default function Windows31({
+  state,
+  press,
+}: {
+  state: EngineState
+  press: (a: string) => void
+}) {
   const displayValue = state.error ? 'Error' : state.buf
 
-  const btn = (
-    label: string,
-    action: string,
-    variant?: Win31ButtonProps['variant'],
-    span?: number
-  ) => (
-    <Win31Button
-      key={`${label}-${action}`}
-      label={label}
-      action={action}
-      variant={variant}
-      span={span}
-      onPress={press}
-    />
+  // Functional button
+  const f = (label: string, action: string, color?: BtnColor) => (
+    <W31Btn key={label} label={label} action={action} color={color} onPress={press} />
+  )
+  // Non-engine button — looks fully active, just does nothing when pressed
+  const d = (label: string, color: BtnColor = 'blue') => (
+    <W31Btn key={label} label={label} action="" color={color} onPress={() => {}} />
   )
 
-  // Win3.1 border — lighter on top/left, darker on bottom/right
-  const win3Border: React.CSSProperties = {
-    border: '1.5px solid',
-    borderColor: '#dfdfdf #808080 #808080 #dfdfdf',
-    boxShadow: 'inset 1px 1px 0 #ffffff',
+  // Win3.1 raised-border style (used for checkbox/radio panels)
+  const panel: React.CSSProperties = {
+    border: '1px solid',
+    borderColor: '#808080 #dfdfdf #dfdfdf #808080',
+    background: '#c0c0c0',
   }
 
   return (
     <div
       style={{
-        width: '224px',
+        width: 360,
         background: '#c0c0c0',
-        ...win3Border,
-        fontFamily: "'MS Sans Serif', Arial, sans-serif",
+        fontFamily: '"MS Sans Serif", Arial, sans-serif',
+        // Win3.1 outer window frame
+        border: '2px solid',
+        borderColor: '#dfdfdf #404040 #404040 #dfdfdf',
+        boxShadow: 'inset 1px 1px 0 #ffffff',
       }}
     >
-      {/* ── Title bar ──────────────────────────────────────────────────────── */}
-      <div
-        style={{
-          background: '#000080',
-          color: '#ffffff',
-          fontSize: '11px',
-          fontWeight: 'bold',
-          padding: '2px 3px 2px 4px',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          userSelect: 'none',
-        }}
-      >
-        {/* System menu icon + title */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-          {/* System menu box */}
-          <div
-            style={{
-              width: 16,
-              height: 13,
+      {/* ── Title bar ────────────────────────────────────────────────── */}
+      <div style={{
+        background: '#000080',
+        color: '#ffffff',
+        fontSize: 11,
+        fontWeight: 'bold',
+        padding: '2px 3px',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        userSelect: 'none',
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 3 }}>
+          {/* System menu icon */}
+          <div style={{
+            width: 16, height: 12,
+            background: '#c0c0c0',
+            border: '1px solid',
+            borderColor: '#dfdfdf #808080 #808080 #dfdfdf',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontSize: 8, color: '#000', lineHeight: 1,
+          }}>─</div>
+          <span>Calculator</span>
+        </div>
+        {/* Minimize / Maximize */}
+        <div style={{ display: 'flex', gap: 2 }}>
+          {['▾', '▴'].map((ic, i) => (
+            <div key={i} style={{
+              width: 16, height: 12,
               background: '#c0c0c0',
               border: '1px solid',
               borderColor: '#dfdfdf #808080 #808080 #dfdfdf',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '8px',
-              color: '#000',
-              lineHeight: 1,
-            }}
-          >
-            ─
-          </div>
-          <span>Calculator</span>
-        </div>
-
-        {/* Minimize + Maximize buttons */}
-        <div style={{ display: 'flex', gap: '2px' }}>
-          {['▾', '▴'].map((icon, i) => (
-            <div
-              key={i}
-              style={{
-                width: 16,
-                height: 13,
-                background: '#c0c0c0',
-                border: '1.5px solid',
-                borderColor: '#dfdfdf #808080 #808080 #dfdfdf',
-                boxShadow: 'inset 1px 1px 0 #ffffff',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '8px',
-                color: '#000',
-                cursor: 'default',
-              }}
-            >
-              {icon}
-            </div>
+              boxShadow: 'inset 1px 1px 0 #ffffff',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontSize: 9, color: '#000', cursor: 'default',
+            }}>{ic}</div>
           ))}
         </div>
       </div>
 
-      {/* ── Menu bar ───────────────────────────────────────────────────────── */}
-      <div
-        style={{
-          borderBottom: '1px solid #808080',
-          padding: '2px 6px',
-          display: 'flex',
-          gap: '8px',
-          fontSize: '11px',
-          userSelect: 'none',
-          background: '#c0c0c0',
-        }}
-      >
-        {['Edit', 'View', 'Help'].map((item) => (
-          <span key={item} style={{ padding: '1px 3px', cursor: 'default' }}>
-            {item}
-          </span>
+      {/* ── Menu bar ─────────────────────────────────────────────────── */}
+      <div style={{
+        borderBottom: '1px solid #808080',
+        padding: '1px 4px',
+        display: 'flex',
+        fontSize: 11,
+        userSelect: 'none',
+        background: '#c0c0c0',
+      }}>
+        {['Edit', 'View', 'Help'].map(item => (
+          <span key={item} style={{ padding: '1px 5px', cursor: 'default' }}>{item}</span>
         ))}
       </div>
 
-      {/* ── Display ────────────────────────────────────────────────────────── */}
-      <div style={{ padding: '6px 6px 4px' }}>
-        <div
-          style={{
-            background: '#ffffff',
-            border: '1.5px solid',
-            borderColor: '#808080 #dfdfdf #dfdfdf #808080',
-            textAlign: 'right',
-            padding: '2px 6px',
-            fontSize: '20px',
-            fontWeight: 'bold',
-            fontFamily: "'Share Tech Mono', 'Courier New', monospace",
-            minHeight: '28px',
-            lineHeight: '24px',
-            overflow: 'hidden',
-            whiteSpace: 'nowrap',
-            color: '#000000',
-          }}
-        >
+      {/* ── Content ──────────────────────────────────────────────────── */}
+      <div style={{ padding: '3px 4px 4px' }}>
+
+        {/* Display */}
+        <div style={{
+          background: '#ffffff',
+          border: '1px solid',
+          borderColor: '#808080 #dfdfdf #dfdfdf #808080',
+          textAlign: 'right',
+          padding: '1px 5px',
+          fontSize: 17,
+          fontFamily: '"Courier New", monospace',
+          minHeight: 26,
+          lineHeight: '24px',
+          color: '#000',
+          marginBottom: 3,
+          overflow: 'hidden',
+          whiteSpace: 'nowrap',
+        }}>
           {displayValue}
         </div>
-      </div>
 
-      {/* ── Button area ────────────────────────────────────────────────────── */}
-      <div style={{ padding: '0 6px 6px' }}>
-
-        {/* Row 1 — Back · CE · C */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '3px',
-            marginBottom: '3px',
-          }}
-        >
-          {btn('Back', 'back', 'back')}
-          {btn('CE', 'ce', 'back')}
-          {btn('C', 'clear', 'clear')}
+        {/* Mode radio row: Hex / Dec / Oct / Bin | Degrees / Radians / Grads */}
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          padding: '2px 4px',
+          marginBottom: 2,
+          ...panel,
+        }}>
+          <Radio label="Hex" />
+          <Radio label="Dec" checked />
+          <Radio label="Oct" />
+          <Radio label="Bin" />
+          <span style={{ width: 1, alignSelf: 'stretch', background: '#808080', margin: '0 5px' }} />
+          <Radio label="Degrees" checked />
+          <Radio label="Radians" />
+          <Radio label="Grads" />
         </div>
 
-        {/* Main 6-column grid */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(6, 1fr)',
-            gap: '3px',
-          }}
-        >
-          {/* Row 2 */}
-          {btn('MC', 'mc', 'memory')}
-          {btn('7', 'digit_7')}
-          {btn('8', 'digit_8')}
-          {btn('9', 'digit_9')}
-          {btn('/', 'div', 'operator')}
-          {btn('sqrt', 'sqrt', 'operator')}
+        {/* Inv / Hyp / blank / blank   +   Backspace / CE / C */}
+        <div style={{ display: 'flex', gap: 2, marginBottom: 2 }}>
+          {/* Left side — aligns with scientific panel */}
+          <div style={{ display: 'flex', gap: 2, width: 158, flexShrink: 0 }}>
+            <div style={{ flex: 1, height: 22, display: 'flex', alignItems: 'center', ...panel }}>
+              <Checkbox label="Inv" />
+            </div>
+            <div style={{ flex: 1, height: 22, display: 'flex', alignItems: 'center', ...panel }}>
+              <Checkbox label="Hyp" />
+            </div>
+            {/* Two blank raised boxes */}
+            <div style={{
+              flex: 1, height: 22,
+              border: '1px solid',
+              borderColor: '#dfdfdf #808080 #808080 #dfdfdf',
+              background: '#c0c0c0',
+            }} />
+            <div style={{
+              flex: 1, height: 22,
+              border: '1px solid',
+              borderColor: '#dfdfdf #808080 #808080 #dfdfdf',
+              background: '#c0c0c0',
+            }} />
+          </div>
+          {/* Right side — Backspace, CE, C */}
+          <div style={{ display: 'flex', gap: 2, flex: 1 }}>
+            {f('Backspace', 'back', 'blue')}
+            {f('CE', 'clear', 'blue')}
+            {f('C', 'clear', 'blue')}
+          </div>
+        </div>
 
-          {/* Row 3 */}
-          {btn('MR', 'rcl', 'memory')}
-          {btn('4', 'digit_4')}
-          {btn('5', 'digit_5')}
-          {btn('6', 'digit_6')}
-          {btn('*', 'mul', 'operator')}
-          {btn('%', 'pct', 'operator')}
+        {/* Main button area */}
+        <div style={{ display: 'flex', gap: 4 }}>
 
-          {/* Row 4 */}
-          {btn('MS', 'sto', 'memory')}
-          {btn('1', 'digit_1')}
-          {btn('2', 'digit_2')}
-          {btn('3', 'digit_3')}
-          {btn('-', 'sub', 'operator')}
-          {btn('1/x', 'inv', 'operator')}
+          {/* ── Scientific panel (5 cols × 5 rows) ───────────── */}
+          <div style={{ width: 158, flexShrink: 0 }}>
+            <Row>{[d('Sta'), d('F-E','red'), d('('), d(')','red'), f('MC','mc','blue')]}</Row>
+            <Row>{[d('Ave'), d('dms','red'), d('Exp'), f('ln','ln','red'), f('MR','rcl','blue')]}</Row>
+            <Row>{[d('Sum'), f('sin','sin','red'), d('x^y'), f('log','log','red'), f('MS','sto','blue')]}</Row>
+            <Row>{[d('s'), f('cos','cos','red'), d('x^3'), d('n!','red'), d('M+')]}</Row>
+            <Row>{[d('Dat'), f('tan','tan','red'), f('x²','sq','blue'), f('1/x','inv','red'), f('pi','pi','blue')]}</Row>
+          </div>
 
-          {/* Row 5 */}
-          {btn('M+', 'madd', 'memory')}
-          {btn('0', 'digit_0', undefined, 2)}
-          {btn('+/-', 'neg')}
-          {btn('.', 'dot')}
-          {btn('+', 'add', 'operator')}
-          {btn('=', 'eq', 'equals')}
+          {/* ── Main numpad (6 cols × 5 rows) ────────────────── */}
+          <div style={{ flex: 1 }}>
+            <Row>{[f('7','digit_7'), f('8','digit_8'), f('9','digit_9'), f('/','div','red'), d('Mod'), d('And')]}</Row>
+            <Row>{[f('4','digit_4'), f('5','digit_5'), f('6','digit_6'), f('*','mul','red'), d('Or'),  d('Xor')]}</Row>
+            <Row>{[f('1','digit_1'), f('2','digit_2'), f('3','digit_3'), f('-','sub','red'), d('Lsh'), d('Not')]}</Row>
+            <Row>{[f('0','digit_0'), f('+/-','neg'), f('.','dot'), f('+','add','red'), f('=','eq','red'), d('Int')]}</Row>
+            <Row>{[d('A'), d('B'), d('C','blue'), d('D'), d('E'), d('F')]}</Row>
+          </div>
+
         </div>
       </div>
     </div>
