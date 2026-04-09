@@ -26,6 +26,8 @@ export interface CategoryGroup {
   id: string
   label: string
   calcIds: string[]
+  icon: string   // SVG path d-attribute (16×16 viewBox)
+  iconType?: 'fill' | 'stroke'  // default fill; stroke for line-art icons
 }
 
 export const CALCULATORS: CalcMeta[] = [
@@ -200,9 +202,66 @@ export const CALCULATORS: CalcMeta[] = [
 ]
 
 export const CATEGORIES: CategoryGroup[] = [
-  { id: 'early',     label: 'Early Electronic', calcIds: ['sharpqt8d'] },
-  { id: 'led',       label: 'LED Era',           calcIds: ['ti30'] },
-  { id: 'financial', label: 'Financial',         calcIds: ['hp12c'] },
-  { id: 'graphing',  label: 'Graphing',          calcIds: ['casiofx7000g'] },
-  { id: 'software',  label: 'Software',          calcIds: ['win1', 'win31'] },
+  {
+    id: 'mechanical',
+    label: 'Mechanical',
+    calcIds: [],
+    icon: 'M7 1v2.1A5 5 0 0 0 4.2 4.6L2.4 3.6 1 5l1 1.8A5 5 0 0 0 2 8a5 5 0 0 0 .1 1.2L1 11l1.4 1.4 1.8-1A5 5 0 0 0 7 12.9V15h2v-2.1A5 5 0 0 0 11.8 11.4l1.8 1 1.4-1.4-1-1.8A5 5 0 0 0 14 8a5 5 0 0 0-.1-1.2L15 5 13.6 3.6l-1.8 1A5 5 0 0 0 9 3.1V1H7zm1 5a2 2 0 1 1 0 4 2 2 0 0 1 0-4z',
+  },
+  {
+    id: 'early',
+    label: 'Early Electronic',
+    calcIds: ['sharpqt8d'],
+    icon: 'M4 5h8a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zm1 2v2h2V7H5zm3 0v2h2V7H8z',
+  },
+  {
+    id: 'led',
+    label: 'LED Era',
+    calcIds: ['ti30'],
+    icon: 'M4 2h8v1H4zM3 3h1v5H3zM12 3h1v5h-1zM4 7.5h8v1H4zM3 8.5h1v5H3zM12 8.5h1v5h-1zM4 13h8v1H4z',
+  },
+  {
+    id: 'lcd',
+    label: 'LCD Era',
+    calcIds: [],
+    icon: 'M1 3h14v10H1V3zm1 1v8h12V4H2zm2 1h3v2H4V5zm5 0h3v2H9V5zm-5 3h3v2H4V8zm5 0h3v2H9V8z',
+  },
+  {
+    id: 'graphing',
+    label: 'Graphing',
+    calcIds: ['casiofx7000g'],
+    icon: 'M2 13L6 8l3 2 3-5 2 2',
+    iconType: 'stroke',
+  },
+  {
+    id: 'financial',
+    label: 'Financial',
+    calcIds: ['hp12c'],
+    icon: 'M2 13V9h3v4H2zm4 0V6h3v7H6zm4 0V3h3v10h-3z',
+  },
+  {
+    id: 'education',
+    label: 'Education',
+    calcIds: [],
+    icon: 'M8 3L2 6v7h5.5V7H8v6H13.5V6L8 3z',
+  },
+  {
+    id: 'modern',
+    label: 'Modern',
+    calcIds: [],
+    icon: 'M2 2h5v5H2zM9 2h5v5H9zM2 9h5v5H2zM9 9h5v5H9z',
+  },
+  {
+    id: 'software',
+    label: 'Software',
+    calcIds: ['win1', 'win31'],
+    icon: 'M4 1v12l3-3 2 5 2-1-2-5 3.5-.5z',
+  },
+  {
+    id: 'experimental',
+    label: 'Experimental',
+    calcIds: [],
+    icon: 'M6 2h4v4l3 7H3L6 6V2zM5.5 2h5',
+    iconType: 'stroke',
+  },
 ]

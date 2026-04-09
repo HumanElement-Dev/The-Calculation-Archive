@@ -59,7 +59,9 @@ export default function Sidebar({ activeId, onSelect }: SidebarProps) {
 
       {/* ── Category tree ───────────────────────────────────────────────────── */}
       <div style={{ flex: 1, overflowY: 'auto', padding: '6px 0 4px' }}>
-        {CATEGORIES.map((cat) => {
+        {CATEGORIES.filter((cat) =>
+          cat.calcIds.some((id) => CALCULATORS.find((c) => c.id === id))
+        ).map((cat) => {
           const isCollapsed = !!collapsed[cat.id]
           return (
             <div key={cat.id}>
@@ -133,7 +135,7 @@ export default function Sidebar({ activeId, onSelect }: SidebarProps) {
                         gap: 10,
                         padding: '7px 14px 7px 26px',
                         background: isActive
-                          ? 'rgba(255,255,255,0.055)'
+                          ? 'rgba(255,255,255,0.08)'
                           : 'none',
                         border: 'none',
                         borderLeft: `2px solid ${
@@ -155,30 +157,28 @@ export default function Sidebar({ activeId, onSelect }: SidebarProps) {
                             'none'
                       }}
                     >
-                      {/* Colour swatch mini-thumb */}
+                      {/* Category icon */}
                       <div
                         style={{
                           width: 20,
-                          height: 26,
-                          background: calc.thumbBg,
-                          border: `1px solid ${calc.thumbBorder}`,
-                          borderRadius: 2,
                           flexShrink: 0,
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
                         }}
                       >
-                        <span
-                          style={{
-                            fontFamily: "'DM Mono', monospace",
-                            fontSize: 6,
-                            color: calc.thumbText,
-                            fontWeight: 600,
-                          }}
+                        <svg
+                          width="13"
+                          height="13"
+                          viewBox="0 0 16 16"
+                          fill={cat.iconType === 'stroke' ? 'none' : (isActive ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.35)')}
+                          stroke={cat.iconType === 'stroke' ? (isActive ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.35)') : 'none'}
+                          strokeWidth={cat.iconType === 'stroke' ? 1.5 : 0}
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         >
-                          {calc.thumbLabel}
-                        </span>
+                          <path d={cat.icon} />
+                        </svg>
                       </div>
 
                       {/* Name + year */}
