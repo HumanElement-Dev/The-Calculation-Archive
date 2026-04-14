@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/readme-banner.png" alt="The Calculation Archive" width="480"/>
+</p>
+
 # The Calculation Archive
 
 ![React](https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react&logoColor=white)
@@ -60,6 +64,6 @@ Every calculator here represents a moment when someone decided *this* is what co
 <br/>
 
 <p align="center">
-  <sub>a human element idea</sub><br/>
+  <sub>a [<a href="https://humanelement.agency">HUMANELEMENT</a> idea</sub><br/>
   <sub>made with love by <a href="https://github.com/HumanElement-Dev">HumanElement</a> and Claude</sub>
 </p>
