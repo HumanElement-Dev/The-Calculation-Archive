@@ -8,6 +8,7 @@ import Windows31 from './calculators/Windows31'
 import Windows1  from './calculators/Windows1'
 import PhotoCalculator from './PhotoCalculator'
 import { skin as sharpSkin, photos as sharpPhotos } from '../skins/sharp-qt8d'
+import { skin as waltonsSkin, photos as waltonsPhotos } from '../skins/waltons-primeline'
 
 type AnimPhase = 'idle' | 'out' | 'in'
 
@@ -29,7 +30,7 @@ function CalcWrapper({
   // Photo-based calculators: drop-shadow traces the rectangular image boundary,
   // making the white photo background obvious. Suppress it; the photo's own
   // vignette handles edge softening instead.
-  const isPhoto = calcId === 'sharpqt8d'
+  const isPhoto = calcId === 'sharpqt8d' || calcId === 'waltons-primeline'
   const BASE_SHADOW = isPhoto ? 'none'
     : 'drop-shadow(0 44px 80px rgba(0,0,0,0.88)) drop-shadow(0 8px 18px rgba(0,0,0,0.55))'
   const HOVER_SHADOW = isPhoto ? 'none'
@@ -93,6 +94,15 @@ function CalcWrapper({
           state={state}
           press={press}
           width={320}
+        />
+      )}
+      {calcId === 'waltons-primeline' && (
+        <PhotoCalculator
+          skin={waltonsSkin}
+          photo={waltonsPhotos.full}
+          state={state}
+          press={press}
+          width={300}
         />
       )}
     </div>
@@ -209,9 +219,10 @@ export default function Stage({ activeId }: StageProps) {
           position: 'relative',
           zIndex: 2,
           transform: `scale(${
-            visibleId === 'sharpqt8d' ? 1.3
-            : visibleId === 'win31'   ? 1.1
-            : visibleId === 'win1'    ? 1.15
+            visibleId === 'sharpqt8d'        ? 1.3
+            : visibleId === 'waltons-primeline' ? 1.2
+            : visibleId === 'win31'          ? 1.1
+            : visibleId === 'win1'           ? 1.15
             : 1.65
           })`,
           transformOrigin: 'center center',

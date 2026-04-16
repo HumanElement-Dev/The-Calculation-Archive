@@ -172,6 +172,34 @@ export const CALCULATORS: CalcMeta[] = [
     glowColor: 'rgba(0,0,128,0.08)',
   },
   {
+    id: 'waltons-primeline',
+    manufacturer: 'Waltons',
+    model: 'Primeline Workmate',
+    fullName: 'Waltons Primeline Workmate Basic Calculator',
+    type: 'Desktop',
+    category: 'lcd',
+    year: 2008,
+    description:
+      'A 12-digit solar-assisted desktop calculator from South African stationer Waltons. The Workmate is a classroom and office staple — known for its candy-colour body and satisfyingly chunky tactile buttons.',
+    launchPrice: '≈ R49.95',
+    launchPriceToday: '≈ R129 today',
+    displayType: 'LCD (12-digit)',
+    functions: 14,
+    power: 'Solar + LR1130 battery',
+    weight: '0.26 lbs',
+    notes: [
+      'South African classroom and office staple',
+      'Available in multiple candy colours',
+      'Solar-assisted with battery backup',
+    ],
+    thumbLabel: 'WP',
+    thumbBg: '#e8006e',
+    thumbBorder: 'rgba(255,255,255,0.25)',
+    thumbText: 'rgba(255,255,255,0.90)',
+    accentColor: 'rgba(255,80,160,1)',
+    glowColor: 'rgba(232,0,110,0.10)',
+  },
+  {
     id: 'casiofx7000g',
     manufacturer: 'Casio',
     model: 'fx-7000G',
@@ -223,7 +251,7 @@ export const CATEGORIES: CategoryGroup[] = [
   {
     id: 'lcd',
     label: 'LCD Era',
-    calcIds: [],
+    calcIds: ['waltons-primeline'],
     icon: 'M1 3h14v10H1V3zm1 1v8h12V4H2zm2 1h3v2H4V5zm5 0h3v2H9V5zm-5 3h3v2H4V8zm5 0h3v2H9V8z',
   },
   {

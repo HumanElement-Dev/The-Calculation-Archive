@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "id": "waltons-primeline",
+    "name": "Waltons Primeline Workmate",
+    "manufacturer": "Waltons",
+    "year": 2008,
+    "description": "A 12-digit solar-assisted desktop calculator from South African stationer Waltons. The Workmate is a classroom and office staple — known for its candy-colour body and satisfyingly chunky buttons.",
+    "imageFile": "waltons-primeline.png",
+    "thumbnailFile": "waltons-primeline.png",
+    "naturalWidth": 1925,
+    "naturalHeight": 2281
+  },
+  "capabilities": {
+    "hasScientific": false,
+    "hasDegRadMode": false,
+    "hasMemory": true,
+    "hasShift": false,
+    "hasParentheses": false
+  },
+  "display": {
+    "x": 0.090,
+    "y": 0.168,
+    "width": 0.820,
+    "height": 0.128,
+    "fontFamily": "\"DSEG7-Classic\", monospace",
+    "fontSize": "5.8cqw",
+    "color": "#1a1a1a",
+    "backgroundColor": "transparent",
+    "textAlign": "right",
+    "padding": "0 3%",
+    "effect": "lcd-dark"
+  },
+  "buttons": [
+    { "id": "btn-off",  "label": "OFF",  "action": "noop",           "x": 0.073, "y": 0.338, "width": 0.148, "height": 0.068 },
+    { "id": "btn-gt",   "label": "GT",   "action": "noop",           "x": 0.243, "y": 0.338, "width": 0.148, "height": 0.068 },
+    { "id": "btn-neg",  "label": "+/−",  "action": "negate",         "x": 0.413, "y": 0.338, "width": 0.148, "height": 0.068 },
+    { "id": "btn-ac",   "label": "AC",   "action": "clear",          "x": 0.583, "y": 0.338, "width": 0.148, "height": 0.068 },
+    { "id": "btn-cce",  "label": "C·CE", "action": "clear",          "x": 0.753, "y": 0.338, "width": 0.172, "height": 0.068 },
+
+    { "id": "btn-mrc",  "label": "MRC",  "action": "memory-recall",   "x": 0.073, "y": 0.432, "width": 0.148, "height": 0.070 },
+    { "id": "btn-mm",   "label": "M−",   "action": "memory-subtract", "x": 0.243, "y": 0.432, "width": 0.148, "height": 0.070 },
+    { "id": "btn-mp",   "label": "M+",   "action": "memory-add",      "x": 0.413, "y": 0.432, "width": 0.148, "height": 0.070 },
+    { "id": "btn-mu",   "label": "MU",   "action": "noop",            "x": 0.583, "y": 0.432, "width": 0.148, "height": 0.070 },
+    { "id": "btn-back", "label": "→",    "action": "backspace",       "x": 0.753, "y": 0.432, "width": 0.172, "height": 0.070 },
+
+    { "id": "btn-7",    "label": "7",    "action": "7",       "x": 0.073, "y": 0.526, "width": 0.148, "height": 0.075, "keyboardKey": "7" },
+    { "id": "btn-8",    "label": "8",    "action": "8",       "x": 0.243, "y": 0.526, "width": 0.148, "height": 0.075, "keyboardKey": "8" },
+    { "id": "btn-9",    "label": "9",    "action": "9",       "x": 0.413, "y": 0.526, "width": 0.148, "height": 0.075, "keyboardKey": "9" },
+    { "id": "btn-pct",  "label": "%",    "action": "percent", "x": 0.583, "y": 0.526, "width": 0.148, "height": 0.075 },
+    { "id": "btn-sqrt", "label": "√",    "action": "sqrt",    "x": 0.753, "y": 0.526, "width": 0.172, "height": 0.075 },
+
+    { "id": "btn-4",    "label": "4",    "action": "4",        "x": 0.073, "y": 0.620, "width": 0.148, "height": 0.075, "keyboardKey": "4" },
+    { "id": "btn-5",    "label": "5",    "action": "5",        "x": 0.243, "y": 0.620, "width": 0.148, "height": 0.075, "keyboardKey": "5" },
+    { "id": "btn-6",    "label": "6",    "action": "6",        "x": 0.413, "y": 0.620, "width": 0.148, "height": 0.075, "keyboardKey": "6" },
+    { "id": "btn-mul",  "label": "×",    "action": "multiply", "x": 0.583, "y": 0.620, "width": 0.148, "height": 0.075, "keyboardKey": "*" },
+    { "id": "btn-div",  "label": "÷",    "action": "divide",   "x": 0.753, "y": 0.620, "width": 0.172, "height": 0.075, "keyboardKey": "/" },
+
+    { "id": "btn-1",    "label": "1",    "action": "1",        "x": 0.073, "y": 0.714, "width": 0.148, "height": 0.075, "keyboardKey": "1" },
+    { "id": "btn-2",    "label": "2",    "action": "2",        "x": 0.243, "y": 0.714, "width": 0.148, "height": 0.075, "keyboardKey": "2" },
+    { "id": "btn-3",    "label": "3",    "action": "3",        "x": 0.413, "y": 0.714, "width": 0.148, "height": 0.075, "keyboardKey": "3" },
+    { "id": "btn-add",  "label": "+",    "action": "add",      "x": 0.583, "y": 0.714, "width": 0.148, "height": 0.168, "keyboardKey": "+" },
+    { "id": "btn-sub",  "label": "−",    "action": "subtract", "x": 0.753, "y": 0.714, "width": 0.172, "height": 0.075, "keyboardKey": "-" },
+
+    { "id": "btn-0",    "label": "0",    "action": "0",           "x": 0.073, "y": 0.808, "width": 0.175, "height": 0.075, "keyboardKey": "0" },
+    { "id": "btn-00",   "label": "00",   "action": "double-zero", "x": 0.264, "y": 0.808, "width": 0.130, "height": 0.075 },
+    { "id": "btn-dot",  "label": ".",    "action": "decimal",     "x": 0.413, "y": 0.808, "width": 0.148, "height": 0.075, "keyboardKey": "." },
+    { "id": "btn-eq",   "label": "=",    "action": "equals",      "x": 0.753, "y": 0.808, "width": 0.172, "height": 0.075, "keyboardKey": "Enter" }
+  ]
+}
